@@ -33,6 +33,7 @@ cameraTrigger.onclick = function()
 {
 	cameraSensor.width = 
 		cameraView.videoWidth;
+	
 	cameraSensor.height = 
 		cameraView.videoHeight;
 	
@@ -41,6 +42,18 @@ cameraTrigger.onclick = function()
 			cameraSensor.toDataURL("image/webp");
 	
 	cameraOutput.classList.add("taken");
+	
+	var dataURL = cameraOutput;
+		$.ajax({ 
+		type: "POST", 
+		url: "script.php", 
+		data: {  
+			imgBase64: dataURL 
+		} 
+	}).done(function(o) { 
+		console.log('saved');  
+	}); 
+	
 };
 
 window.addEventListener("load", cameraStart, false);
